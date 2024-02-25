@@ -1,5 +1,6 @@
 # Module imports
 from flask import Flask, render_template
+from urllib.parse import quote
 import requests
 import pandas as pd
 
@@ -15,18 +16,18 @@ def home():
     all_data = []
     company_identifiers = companies()
     for i in range(len(company_identifiers)):
-        url = f"https://financialmodelingprep.com/api/v3/market-capitalization/{company_identifiers[i]}?apikey={api_key}" 
-
+        url = f"https://financialmodelingprep.com/api/v3/profile/{company_identifiers[i]}?apikey={api_key}"
         response = requests.get(url)
         data = response.json()
         all_data.extend(data)
 
+    
     # Convert to DataFrame
     df = pd.DataFrame(all_data)
     
     # Assuming the API returns market cap, sort by 'marketCap' and select top 25 companies
     # Note: Adjust the field name 'marketCap' based on actual response
-    top_companies = df.sort_values(by='marketCap', ascending=False).head(25)
+    top_companies = df.sort_values(by='mktCap', ascending=False).head(25)
     
     return render_template('index.html', companies=top_companies.to_dict('records'))
 

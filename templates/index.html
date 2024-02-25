@@ -9,7 +9,10 @@
     <h1>Top 25 S&P 500 Companies by Market Cap</h1>
     <ol>
       {% for company in companies %}
-      <li>{{ company.symbol }}: ${{ company.marketCap }}</li>
+      <li>
+        {{company.companyName + " (" + company.symbol + ")" }}:
+        ${{company.mktCap}}
+      </li>
       {% endfor %}
     </ol>
   </body>
