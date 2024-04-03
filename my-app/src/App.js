@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import CompanyList from './CompanyList';
 
 function App() {
+  const [companies, setCompanies] = useState([]);
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:5000/companies')
+      .then(response => response.json())
+      .then(data => setCompanies(data))
+      .catch(error => console.error("Failed to fetch companies", error));
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Top 25 S&P 500 Companies by Market Cap</h1>
+      <CompanyList companies={companies} />
     </div>
   );
 }
