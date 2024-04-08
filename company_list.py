@@ -6,7 +6,6 @@ def get_top_companies():
         "AMZN",
         "NVDA",
         "META",
-        "BRK.B",
         "TSLA",
         "LLY",
         "V",
@@ -24,7 +23,9 @@ def get_top_companies():
         "CVX",
         "ABBV",
         "ORCL",
-        "BAC"
+        "BAC",
+        "ADBE"
+
     ]
 
     return companies
